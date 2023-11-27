@@ -1,0 +1,69 @@
+<Window x:Class="TextItemManager.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TextItemManager.ViewModels"
+        mc:Ignorable="d"
+        Title="Text Item Manager" Height="350" Width="525">
+    <Window.DataContext>
+        <local:MainViewModel />
+    </Window.DataContext>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+      
+        <StackPanel Grid.Column="0" VerticalAlignment="Top" Margin="10">
+            <TextBox Text="{Binding NewTextItemContent, UpdateSourceTrigger=PropertyChanged}" />
+            <Button Content="Add" Command="{Binding AddCommand}" Margin="0,10,0,0" Background="#4CAF50" Foreground="White" />
+            <Button Content="Edit" Command="{Binding EditCommand}" Margin="0,10,0,0" Background="#FF9800" Foreground="White" />
+            <Button Content="Remove" Command="{Binding RemoveCommand}" Margin="0,10,0,0" Background="#F44336" Foreground="White" />
+        </StackPanel>
+
+        <ListView x:Name="MainListView" Grid.Column="1" ItemsSource="{Binding TextItems}" SelectedItem="{Binding SelectedTextItem}" SelectionChanged="MainListView_SelectionChanged">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="ID">
+                        <GridViewColumn.HeaderContainerStyle>
+                            <Style TargetType="{x:Type GridViewColumnHeader}">
+                                <Setter Property="FontWeight" Value="Bold"/>
+                                <Setter Property="Background" Value="#4CAF50"/>
+                                <Setter Property="Foreground" Value="White"/>
+                            </Style>
+                        </GridViewColumn.HeaderContainerStyle>
+                        <GridViewColumn.DisplayMemberBinding>
+                            <Binding Path="Id"/>
+                        </GridViewColumn.DisplayMemberBinding>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Content">
+                        <GridViewColumn.HeaderContainerStyle>
+                            <Style TargetType="{x:Type GridViewColumnHeader}">
+                                <Setter Property="FontWeight" Value="Bold"/>
+                                <Setter Property="Background" Value="#4CAF50"/>
+                                <Setter Property="Foreground" Value="White"/>
+                            </Style>
+                        </GridViewColumn.HeaderContainerStyle>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Label Content="{Binding Content}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <Popup IsOpen="{Binding IsEditing}" StaysOpen="True" PlacementTarget="{Binding ElementName=MainListView}" Placement="Center" MinWidth="300" MinHeight="200">
+            <Border BorderBrush="Black" BorderThickness="1" Background="White">
+                <StackPanel Margin="10">
+                    <TextBlock Text="Edit Content:" />
+                    <TextBox Text="{Binding SelectedTextItem.Content, UpdateSourceTrigger=PropertyChanged}" Margin="0,10,0,0" TextChanged="TextBox_TextChanged" />
+                    <Button Content="Save" Command="{Binding SaveEditingCommand}" IsEnabled="{Binding IsSaveEnabled}" Margin="0,10,0,0" Background="#4CAF50" Foreground="White" />
+                    <Button Content="Cancel" Command="{Binding CancelEditingCommand}" Margin="0,10,0,0" Background="#F44336" Foreground="White" />
+                </StackPanel>
+            </Border>
+        </Popup>
+    </Grid>
+</Window>
