@@ -87,13 +87,13 @@ Update-Database
 ## Screenshots
 
 - Home page.If you do not click anywhere, all buttons are inactive. </br>
-![Screenshot 1](Images/SS.PNG)
+![Screenshot 1](TextItemManager/Images/SS.PNG)
 - When the text field is filled, the Add button becomes active. </br>
-![Screenshot 2](Images/SS1.PNG)
+![Screenshot 2](TextItemManager/Images/SS1.PNG)
 - When you click on one of the contents, the Edit and Remove buttons become active. </br>
-![Screenshot 3](Images/SS2.PNG)
+![Screenshot 3](TextItemManager/Images/SS2.PNG)
 - When the Edit button is pressed, a new pop up opens. </br>
-![Screenshot 4](Images/SS3.PNG)
+![Screenshot 4](TextItemManager/Images/SS3.PNG)
 - If the Edit Content is empty, the Save button will be inactive. In this way, empty content is prevented from being recorded. </br>
-![Screenshot 5](Images/SS4.PNG)
+![Screenshot 5](TextItemManager/Images/SS4.PNG)
 
